@@ -1,40 +1,18 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# SpaceX Launches Project
 
-## Getting Started
+Questo progetto Next.js utilizza l'API di SpaceX per visualizzare informazioni sui lanci aerospaziali. Offre funzionalità come la navigazione, l'autenticazione degli utenti, la gestione dei preferiti e la visualizzazione dettagliata dei lanci.
 
-First, run the development server:
+## Funzionalità
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Navbar**: Navigazione tra la Home, la pagina dei lanci, e la pagina dei preferiti.
+- **Home**: Pagina minimalista di presentazione.
+- **Pagina dei Lanci**: Mostra tutte le card dei lanci aerospaziali in ordine di data, ognuna con immagine, titolo, data e numero di volo. È possibile aggiungere/rimuovere una card dai preferiti.
+- **Pagina di Dettaglio del Lancio**: Fornisce tutti i dettagli presenti nelle card, oltre ai dettagli del successo del volo, una descrizione, il video del lancio e un link ad un articolo correlato.
+- **Autenticazione**: Accesso utente per abilitare la funzionalità dei preferiti.
+- **Pagina dei Preferiti**: Visualizzazione delle card preferite dell'utente. Disponibile solo per utenti autenticati.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Setup del Progetto
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. Clonare il repository: `git clone <repository_url>`
+2. Installare le dipendenze: `npm install`
+3. Avviare l'applicazione: `npm run dev`
