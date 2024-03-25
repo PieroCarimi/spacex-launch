@@ -14,10 +14,11 @@ export const AppContext = createContext<TContext>({
 
 interface Props {
     children: ReactNode;
+    initialLaunches: Launch[];
 }
 
-export function ContextProvider({children}: Props){
-    const [ launches, setLaunches ] = useState<TContext["launches"]>(null);
+export function ContextProvider({children, initialLaunches}: Props){
+    const [ launches, setLaunches ] = useState<TContext["launches"]>(initialLaunches);
     const [ isLogged, setIsLogged ] = useState<TContext["isLogged"]>(false);
     const [ loading, setLoading ] = useState<TContext["loading"]>(false);
     const [ error, setError ] = useState<TContext["error"]>("");
