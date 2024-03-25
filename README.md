@@ -8,8 +8,12 @@ Questo progetto Next.js utilizza l'API di SpaceX per visualizzare informazioni s
 - **Home**: Pagina minimalista di presentazione.
 - **Pagina dei Lanci**: Mostra tutte le card dei lanci aerospaziali in ordine di data, ognuna con immagine, titolo, data e numero di volo. È possibile aggiungere/rimuovere una card dai preferiti.
 - **Pagina di Dettaglio del Lancio**: Fornisce tutti i dettagli presenti nelle card, oltre ai dettagli del successo del volo, una descrizione, il video del lancio e un link ad un articolo correlato.
-- **Autenticazione**: Accesso utente per abilitare la funzionalità dei preferiti.
-- **Pagina dei Preferiti**: Visualizzazione delle card preferite dell'utente. Disponibile solo per utenti autenticati.
+- **Pagina dei Preferiti**: Visualizzazione delle card preferite dell'utente.
+
+## Tecnologie Utilizzate
+
+- **Next.js**: Framework React per lo sviluppo di applicazioni web.
+- **MySQL**: Sistema di gestione di database relazionali per la persistenza dei dati.
 
 ## Setup del Progetto
 
