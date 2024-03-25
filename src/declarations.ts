@@ -17,6 +17,8 @@ export interface TContext {
     getLaunches: () => void;
     getLaunchById: (launchId: Launch["id"]) => void;
     updateLaunch: (launchId: Launch["id"], updatedLaunch: Launch) => void;
+    createLaunch: (newLaunch: Launch) => void;
+    deleteLaunch: (launchId: Launch["id"]) => void;
     loading: boolean;
     error: string;
 }
