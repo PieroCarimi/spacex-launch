@@ -55,12 +55,12 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     } else if (req.method === 'DELETE') {
       const productId = req.query.id;
       db.query(
-        'DELTE FROM launches WHERE id = ?',
+        'DELETE FROM launches WHERE id = ?',
         [productId],
         (error, results) => {
           if (error) throw error;
-        res.status(200).json({ message: 'Prodotto eliminato con successo' })
+          res.status(200).json({ message: 'Prodotto eliminato con successo' });
         }
-      )
+      );
     }
 }
