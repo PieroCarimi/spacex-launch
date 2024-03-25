@@ -41,5 +41,26 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           res.status(201).json({ message: 'Prodotto aggiunto con successo' });
         }
       );
+    } else if (req.method === 'PUT') {
+      const productId = req.query.id;
+      const { name, flight_number, data_local, success, image_small, image_large, webcast_code, details, article } = req.body;
+      db.query(
+        'UPDATE launches SET name = ?, flight_number = ?, data_local =?, success = ?, image_small = ?, image_large = ?, webcast_code = ?, details = ?, article = ? WHERE id = ?',
+        [name, flight_number, data_local, success, image_small, image_large, webcast_code, details, article, productId],
+        (error, results) => {
+          if (error) throw error;
+          res.status(200).json({ message: 'Prodotto aggiornato con successo' });
+        }
+      );
+    } else if (req.method === 'DELETE') {
+      const productId = req.query.id;
+      db.query(
+        'DELTE FROM launches WHERE id = ?',
+        [productId],
+        (error, results) => {
+          if (error) throw error;
+        res.status(200).json({ message: 'Prodotto eliminato con successo' })
+        }
+      )
     }
 }
