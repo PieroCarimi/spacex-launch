@@ -8,6 +8,8 @@ export const AppContext = createContext<TContext>({
     getLaunches: () => {},
     getLaunchById: () => {},
     updateLaunch: () => {},
+    createLaunch: () => {},
+    deleteLaunch: () => {},
     loading: false,
     error: "",
 })
@@ -69,6 +71,41 @@ export function ContextProvider({children, initialLaunches}: Props){
         }
     }
 
+    const createLaunch = async (newLaunch: Launch) => {
+        try {
+            setLoading(true);
+            await axios.post("/api/launches", newLaunch);
+            setLoading(false);
+            if (launches === null) {
+                setLaunches([newLaunch])
+            } else {
+                setLaunches([...launches, newLaunch]) 
+            }
+        } catch (error: any) {
+            setError(error.message);
+            setLoading(false)
+        }
+    }
+
+    const deleteLaunch = async (launchId: number) => {
+        try {
+            setLoading(true);
+            await axios.delete(`/api/launches?id=${launchId}`);
+            setLaunches((prevLaunches:  Array<Launch> | null) =>{
+                if (prevLaunches !== null){
+                    return prevLaunches.filter((launch: Launch) => launch.id !== launchId);
+                } else {
+                    return null;
+                }
+            }
+            );
+            setLoading(false);
+        } catch (error: any) {
+            setError(error.message);
+            setLoading(false);
+        }
+    };
+
     return (
         <AppContext.Provider
             value={{
@@ -77,6 +114,8 @@ export function ContextProvider({children, initialLaunches}: Props){
                 getLaunches,
                 getLaunchById,
                 updateLaunch,
+                createLaunch,
+                deleteLaunch,
                 loading,
                 error
             }}
