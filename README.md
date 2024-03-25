@@ -4,11 +4,10 @@ Questo progetto Next.js utilizza l'API di SpaceX per visualizzare informazioni s
 
 ## Funzionalità
 
-- **Navbar**: Navigazione tra la Home, la pagina dei lanci, e la pagina dei preferiti.
+- **Navbar**: Navigazione tra la Home e la pagina dei lanci.
 - **Home**: Pagina minimalista di presentazione.
-- **Pagina dei Lanci**: Mostra tutte le card dei lanci aerospaziali in ordine di data, ognuna con immagine, titolo, data e numero di volo. È possibile aggiungere/rimuovere una card dai preferiti.
+- **Pagina dei Lanci**: Mostra tutte le card dei lanci aerospaziali in ordine di data, ognuna con immagine, titolo, data e numero di volo. È possibile aggiungere/rimuovere/aggiornare una card.
 - **Pagina di Dettaglio del Lancio**: Fornisce tutti i dettagli presenti nelle card, oltre ai dettagli del successo del volo, una descrizione, il video del lancio e un link ad un articolo correlato.
-- **Pagina dei Preferiti**: Visualizzazione delle card preferite dell'utente.
 
 ## Tecnologie Utilizzate
 
