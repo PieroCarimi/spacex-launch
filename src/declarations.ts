@@ -1,5 +1,5 @@
 export interface Launch {
-    id: number;
+    idLaunches: number;
     name: string;
     flight_number: number;
     data_local: Date;
@@ -15,10 +15,10 @@ export interface TContext {
     launches:  Array<Launch> | null;
     isLogged: boolean;
     getLaunches: () => void;
-    getLaunchById: (launchId: Launch["id"]) => void;
-    updateLaunch: (launchId: Launch["id"], updatedLaunch: Launch) => void;
+    getLaunchById: (launchId: Launch["idLaunches"]) => void;
+    updateLaunch: (launchId: Launch["idLaunches"], updatedLaunch: Launch) => void;
     createLaunch: (newLaunch: Launch) => void;
-    deleteLaunch: (launchId: Launch["id"]) => void;
+    deleteLaunch: (launchId: Launch["idLaunches"]) => void;
     loading: boolean;
     error: string;
 }
