@@ -37,7 +37,7 @@ export function ContextProvider({children, initialLaunches}: Props){
         }
     }
 
-    const getLaunchById = async (launchId: Launch["id"]) => {
+    const getLaunchById = async (launchId: Launch["idLaunches"]) => {
         try {
             setLoading(true);
             const response = await axios.get(`/api/launches/${launchId}`);
@@ -49,7 +49,7 @@ export function ContextProvider({children, initialLaunches}: Props){
         }
     }
 
-    const updateLaunch = async (launchId: Launch["id"], updatedLaunch: Launch) => {
+    const updateLaunch = async (launchId: Launch["idLaunches"], updatedLaunch: Launch) => {
         if(error)
         try {
             setLoading(true);
@@ -58,7 +58,7 @@ export function ContextProvider({children, initialLaunches}: Props){
             setLaunches(prevLaunches => {
                 if (!prevLaunches) return null;
                 return prevLaunches.map(launch => {
-                    if (launch.id === launchId) {
+                    if (launch.idLaunches === launchId) {
                         return updatedLaunch; // Aggiorna il lancio corrispondente
                     } else {
                         return launch; // Mantieni invariati gli altri lanci
@@ -93,7 +93,7 @@ export function ContextProvider({children, initialLaunches}: Props){
             await axios.delete(`/api/launches?id=${launchId}`);
             setLaunches((prevLaunches:  Array<Launch> | null) =>{
                 if (prevLaunches !== null){
-                    return prevLaunches.filter((launch: Launch) => launch.id !== launchId);
+                    return prevLaunches.filter((launch: Launch) => launch.idLaunches !== launchId);
                 } else {
                     return null;
                 }
