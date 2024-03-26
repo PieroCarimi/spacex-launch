@@ -16,7 +16,7 @@ export const AppContext = createContext<TContext>({
 
 interface Props {
     children: ReactNode;
-    initialLaunches: Launch[];
+    initialLaunches: Launch[] | null;
 }
 
 export function ContextProvider({children, initialLaunches}: Props){
