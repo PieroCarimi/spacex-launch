@@ -42,3 +42,25 @@ export const utilityGetLoading = () => {
         }
     }
 }
+
+export const utilitySetError = (error: string) => {
+    if (typeof window !== 'undefined') {
+        if (!!error) {
+            localStorage.setItem("error", JSON.stringify(error));
+        } else {
+            localStorage.removeItem("error");
+        }
+    }
+}
+
+export const utilityGetError = () => {
+    if (typeof window !== 'undefined') {
+        try{
+            const errorString = localStorage.getItem("error");
+            return errorString ? JSON.parse(errorString) : false;
+        } catch (error: any) {
+            utilitySetError("");
+            return false;
+        }
+    }
+}
