@@ -1,4 +1,5 @@
 import { ContextProvider } from '@/ContextProvider';
+import Navbar from '@/components/Navbar';
 import { TContext } from '@/declarations';
 import '@/styles/globals.css';
 import axios from 'axios';
@@ -10,7 +11,8 @@ export default function App(
 ) {
 	return (
 		<ContextProvider initialLaunches={initialLaunches}>
-			<Component {...pageProps} />;
+      <Navbar/>
+			<Component {...pageProps} />
 		</ContextProvider>
 	);
 }
