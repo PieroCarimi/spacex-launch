@@ -1,4 +1,5 @@
 import { ContextProvider } from '@/ContextProvider';
+import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 import { TContext } from '@/declarations';
 import '@/styles/globals.css';
@@ -11,8 +12,13 @@ export default function App(
 ) {
 	return (
 		<ContextProvider initialLaunches={initialLaunches}>
-      <Navbar/>
-			<Component {...pageProps} />
+			<div className="flex flex-col min-h-screen">
+      			<Navbar/>
+				<main className="flex-grow">
+					<Component {...pageProps} />
+				</main>
+      			<Footer/>
+			</div>
 		</ContextProvider>
 	);
 }
