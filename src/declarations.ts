@@ -3,7 +3,7 @@ export interface Launch {
 	name: string;
 	flight_number: number;
 	data_local: Date;
-	success: boolean;
+	success: number;
 	image_small: string;
 	image_large: string;
 	webcast_code: string;
