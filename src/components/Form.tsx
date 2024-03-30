@@ -35,9 +35,15 @@ export default function Form() {
             formData.name.trim() === '' ||
             formData.flight_number <= 0 ||
             isNaN(new Date(formData.data_local).getTime()) ||
-            !(formData.success === 0 || formData.success === 1)
+            !(formData.success === 0 || formData.success === 1) ||
+            !/\.(jpg|jpeg|png|gif)$/i.test(formData.image_small) ||
+            !/\.(jpg|jpeg|png|gif)$/i.test(formData.image_large) ||
+            formData.webcast_code.length !== 11 ||
+            formData.details.trim() === '' ||
+            !/^(http|https):\/\/[^ "]+$/.test(formData.article)
         ){
             console.error('The form fields are invalid');
+            setIsValid(false);
             return;
         }
         setIsValid(true);
@@ -72,6 +78,7 @@ export default function Form() {
             updateLaunch(parseInt(idLaunches), formDataWithBooleanSuccess);
         }
         toggleModal();
+        setIsValid(false);
     };
     
     return(
@@ -146,7 +153,7 @@ export default function Form() {
                                     <textarea id="details" name="details" rows={4} value={formData.details} onChange={handleChange} className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write launch details here"></textarea>                    
                                 </div>
                             </div>
-                            <button type="submit" className="text-gray-300 inline-flex items-center bg-gray-900 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            <button type="submit" disabled={!isValid} className="text-gray-300 inline-flex items-center bg-gray-900 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                 <svg className="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clipRule="evenodd"></path></svg>
                                 {`${currentPath === '/launches' ? 'Add new launch' : 'Update launch'}`}
                             </button>
