@@ -25,9 +25,23 @@ export default function Form() {
     const currentPath = router.pathname;
     const [modalOpen, setModalOpen] = useState(false);
     const [formData, setFormData] = useState<Launch>(currentPath === `/launches/${idLaunches}` ? getLaunchById(parseInt(idLaunches)) : emptyObject);
+    const [isValid, setIsValid] = useState(false);
 
     let date = new Date(formData.data_local);
     let dateString = date.toISOString().split('T')[0];
+
+    const validation = () => {
+        if(
+            formData.name.trim() === '' ||
+            formData.flight_number <= 0 ||
+            isNaN(new Date(formData.data_local).getTime()) ||
+            !(formData.success === 0 || formData.success === 1)
+        ){
+            console.error('The form fields are invalid');
+            return;
+        }
+        setIsValid(true);
+    };
 
     const toggleModal = () => {
         setModalOpen(!modalOpen);
@@ -45,6 +59,8 @@ export default function Form() {
 
     const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault(); 
+
+        validation();
 
         const formDataWithBooleanSuccess = {
             ...formData,
