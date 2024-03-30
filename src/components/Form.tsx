@@ -1,6 +1,7 @@
 import { AppContext } from "@/ContextProvider";
+import { Launch } from "@/declarations";
 import { useRouter } from "next/router";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 const emptyObject = () =>{
     return ({
@@ -18,21 +19,23 @@ const emptyObject = () =>{
 }
 
 export default function Form() {
+    const {createLaunch, isLogged, getLaunchById, updateLaunch} = useContext(AppContext)
+    const router = useRouter();
+    const { idLaunches }: any = router.query;
+    const currentPath = router.pathname;
     const [modalOpen, setModalOpen] = useState(false);
-    const [formData, setFormData] = useState(emptyObject)
+    const [formData, setFormData] = useState<Launch>(currentPath === `/launches/${idLaunches}` ? getLaunchById(parseInt(idLaunches)) : emptyObject);
 
     let date = new Date(formData.data_local);
     let dateString = date.toISOString().split('T')[0];
-    const {createLaunch, isLogged} = useContext(AppContext)
-
-    const router = useRouter();
-
-    const currentPath = router.pathname;
 
     const toggleModal = () => {
         setModalOpen(!modalOpen);
-        
-        setFormData(emptyObject)
+        if(currentPath === `/launches/${idLaunches}`){
+            setFormData(getLaunchById(parseInt(idLaunches)));
+        } else {
+            setFormData(emptyObject);
+        }
     };
     console.log(formData)
     const handleChange = (e: { target: { name: any; value: any; }; }) => {
@@ -47,18 +50,25 @@ export default function Form() {
             ...formData,
             success: formData.success ? 1 : 0
         };
-        createLaunch(formDataWithBooleanSuccess);
+        if (currentPath === '/launches') {
+            createLaunch(formDataWithBooleanSuccess);
+        } else {
+            updateLaunch(parseInt(idLaunches), formDataWithBooleanSuccess);
+        }
         toggleModal();
     };
     
     return(
         <>
-        <div className={`${(currentPath === ('/launches' || '/launches/:idLaunches') && isLogged) ? '' : 'hidden'} mx-auto max-w-7xl px-2 sm:px-6 lg:px-8`}>
+        <div className={`${(currentPath === ('/launches' || `/launches/${idLaunches}`) && isLogged) ? '' : 'hidden'} mx-auto max-w-7xl px-2 sm:px-6 lg:px-8`}>
             <div className="relative flex h-16 items-center justify-between">
                 <div></div>
                 <div>
                     <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" className={`${modalOpen ? "bg-gray-700" : "bg-gray-800"} block text-gray-300 bg-gray-800 hover:bg-gray-700 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 my-2.5 mx-2.5 text-center`} type="button" onClick={toggleModal}>
-                        <svg className=" w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clipRule="evenodd"></path></svg>
+                        {currentPath === '/launches' ? 
+                            <svg className=" w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clipRule="evenodd"></path></svg>:
+                            <img src="https://uxwing.com/wp-content/themes/uxwing/download/editing-user-action/pencil-outline-icon.png" className="w-5 h-auto filter brightness-0 invert"></img>
+                        }
                     </button>
                 </div>
             </div>
