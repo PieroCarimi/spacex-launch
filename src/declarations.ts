@@ -15,7 +15,7 @@ export interface TContext {
 	launches: Array<Launch> | null;
 	isLogged: boolean;
 	getLaunches: () => void;
-	getLaunchById: (launchId: Launch['idLaunches']) => void;
+	getLaunchById: (launchId: Launch['idLaunches']) => any;
 	updateLaunch: (
 		launchId: Launch['idLaunches'],
 		updatedLaunch: Launch,
