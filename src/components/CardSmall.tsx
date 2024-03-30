@@ -36,7 +36,7 @@ export default function CardSmall({ launch }: { launch: Launch }) {
 				</span>
 			</div>
 			<div className="px-6 pt-3 pb-3">
-				<button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+				<button className="bg-transparent hover:bg-gray-800 text-gray-800 font-semibold hover:text-white py-2 px-4 border border-gray-800 hover:border-transparent rounded">
 					Details
 				</button>
 			</div>
