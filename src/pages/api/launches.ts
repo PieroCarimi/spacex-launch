@@ -22,7 +22,15 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 					},
 				);
 			});
-		} else {
+		} else if (req.query.allIds) {
+			return new Promise((resolve, reject) => {
+				db.query('SELECT idLaunches FROM launches', (error: any, results: { idLaunches: number }[]) => {
+					if (error) throw error;
+					const idList = results.map(result => result.idLaunches);
+					res.status(200).json(idList);
+				})
+			})
+	 	} else {
 			return new Promise((resolve, reject) => {
 				db.query('SELECT * FROM launches', (error, results) => {
 					if (error) throw error;
