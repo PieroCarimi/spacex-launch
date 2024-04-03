@@ -22,6 +22,7 @@ export interface TContext {
 	) => void;
 	createLaunch: (newLaunch: Launch) => void;
 	deleteLaunch: (launchId: Launch['idLaunches']) => void;
+	login: () => void;
 	loading: boolean;
 	error: string;
 }
