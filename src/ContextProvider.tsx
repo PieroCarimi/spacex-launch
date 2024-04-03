@@ -41,7 +41,7 @@ export function ContextProvider({ children, initialLaunches }: Props) {
 	const getLaunchById = async (launchId: Launch['idLaunches']) => {
 		try {
 			setLoading(true);
-			const response = await axios.get(`/api/launches/${launchId}`);
+			const response = await axios.get(`/api/launches?id=${launchId}`);
 			setLoading(false);
 			return response.data;
 		} catch (error: any) {
