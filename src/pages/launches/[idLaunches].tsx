@@ -1,5 +1,6 @@
 import { AppContext } from "@/ContextProvider";
 import CardLarge from "@/components/CardLarge";
+import Form from "@/components/Form";
 import { Launch } from "@/declarations";
 import { utilityIsIdValid } from "@/utilities/utilities";
 import { useRouter } from "next/router";
@@ -36,6 +37,9 @@ export default function DetailLaunch() {
     if (!launch) return null;
 
     return (
-        <CardLarge launch={launch} />
-    );
+        <>
+            <Form />
+            <CardLarge launch={launch} />
+        </>
+    );
 }
