@@ -10,6 +10,7 @@ export const AppContext = createContext<TContext>({
 	updateLaunch: () => {},
 	createLaunch: () => {},
 	deleteLaunch: () => {},
+	login: () =>{},
 	loading: false,
 	error: '',
 });
@@ -114,6 +115,10 @@ export function ContextProvider({ children, initialLaunches }: Props) {
 		}
 	};
 
+	const login = () => {
+		setIsLogged(!isLogged);
+	}
+
 	return (
 		<AppContext.Provider
 			value={{
@@ -126,6 +131,7 @@ export function ContextProvider({ children, initialLaunches }: Props) {
 				deleteLaunch,
 				loading,
 				error,
+				login
 			}}
 		>
 			{children}
