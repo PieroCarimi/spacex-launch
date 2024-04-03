@@ -55,24 +55,23 @@ export function ContextProvider({ children, initialLaunches }: Props) {
 		launchId: Launch['idLaunches'],
 		updatedLaunch: Launch,
 	) => {
-		if (error)
 			try {
 				setLoading(true);
 				const response = await axios.put(
-					`/api/launches/${launchId}`,
+					`/api/launches?id=${launchId}`,
 					updatedLaunch,
 				);
 				setLoading(false);
 				setLaunches((prevLaunches) => {
-					if (!prevLaunches) return null;
+					if (!prevLaunches) return [updatedLaunch]; // Inizializza come un array con updatedLaunch se prevLaunches è null
 					return prevLaunches.map((launch) => {
-						if (launch.idLaunches === launchId) {
-							return updatedLaunch; // Aggiorna il lancio corrispondente
-						} else {
-							return launch; // Mantieni invariati gli altri lanci
-						}
+					  if (launch.idLaunches === launchId) {
+						return updatedLaunch; // Aggiorna il lancio corrispondente
+					  } else {
+						return launch; // Mantieni invariati gli altri lanci
+					  }
 					});
-				});
+				  });				  
 			} catch (error: any) {
 				setError(error.message);
 				setLoading(false);
