@@ -1,3 +1,6 @@
+import { Launch } from "@/declarations";
+import axios from "axios";
+
 export const utilitySetIsLogged = (isLogged: boolean) => {
 	if (typeof window !== 'undefined') {
 		if (isLogged) {
@@ -18,7 +21,7 @@ export const utilityGetIsLogged = () => {
 			return false;
 		}
 	}
-	return false; // Ritorna false se `window` non è definito
+	return false; // Ritorna false se window non è definito
 };
 
 export const utilitySetLoading = (loading: boolean) => {
@@ -64,3 +67,15 @@ export const utilityGetError = () => {
 		}
 	}
 };
+
+export const utilityIsIdValid = async (idLaunches: Launch["idLaunches"]) => {
+    try {
+        const response = await axios.get<number[]>('/api/launches?allIds=true');
+        const ids: number[] = response.data;
+        
+        return ids.includes(idLaunches);
+    } catch (error) {
+        console.error('Errore durante il recupero degli ID:', error);
+        return false;
+    }
+}
