@@ -1,9 +1,11 @@
 import { AppContext } from '@/ContextProvider';
 import { Launch } from '@/declarations';
+import { useRouter } from 'next/router';
 import { useContext } from 'react';
 
 export default function CardSmall({ launch }: { launch: Launch }) {
 	const { deleteLaunch, isLogged } = useContext(AppContext);
+    const router = useRouter();
 
 	function onClickRemove() {
 		if(isLogged) {
@@ -12,6 +14,10 @@ export default function CardSmall({ launch }: { launch: Launch }) {
 			console.error('You must be logged in to remove a launch');
 		}
 	}
+
+    function onClickDetails() {
+        router.push(`/launches/${launch.idLaunches}`);
+    }
 
     return (
         <div className="max-w-sm relative rounded overflow-hidden shadow-lg">
@@ -48,7 +54,7 @@ export default function CardSmall({ launch }: { launch: Launch }) {
                 </span>
             </div>
             <div className="px-6 pt-3 pb-3">
-                <button className="bg-transparent hover:bg-gray-800 text-gray-800 font-semibold hover:text-white py-2 px-4 border border-gray-800 hover:border-transparent rounded">
+                <button className="bg-transparent hover:bg-gray-800 text-gray-800 font-semibold hover:text-white py-2 px-4 border border-gray-800 hover:border-transparent rounded" onClick={onClickDetails}>
                     Details
                 </button>
 				{isLogged ? (
@@ -57,6 +63,6 @@ export default function CardSmall({ launch }: { launch: Launch }) {
 					</button>
 				) : null}
             </div>
-        </div>
-    );
+        </div>
+    );
 }
