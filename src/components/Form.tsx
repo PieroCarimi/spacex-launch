@@ -49,22 +49,17 @@ export default function Form() {
     const toggleModal = async () => {
         setModalOpen(!modalOpen);
         if (currentPath === `/launches/[idLaunches]`) {
-            
             const launchData = await getLaunchById(idLaunches);
-            setFormData(launchData[0]);
+            const launch = launchData[0];
+            launch.success = String(launch.success);
+            launch.flight_number = String(launch.flight_number);
+            launch.data_local = new Date(launch.data_local).toISOString().split('T')[0];
+            setFormData(launch);
         } else {
             setFormData(emptyObject());
         }
     };
 
-    /*const toggleModal = () => {
-        setModalOpen(!modalOpen);
-        if(currentPath === `/launches/[idLaunches]`){
-            setFormData(getLaunchById(idLaunches));
-        } else {
-            setFormData(emptyObject());
-        }
-    };*/
     console.log(formData)
     const handleChange = (e: { target: { name: any; value: any; }; }) => {
         const { name, value } = e.target;
@@ -79,7 +74,7 @@ export default function Form() {
             if (currentPath === '/launches') {
                 createLaunch(formData);
             } else {
-                updateLaunch(parseInt(idLaunches), formData);
+                updateLaunch(idLaunches, formData);
             }
             toggleModal();
             setIsValid(false);
