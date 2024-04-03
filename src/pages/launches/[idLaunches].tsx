@@ -9,7 +9,7 @@ import { useContext, useEffect, useState } from "react";
 export default function DetailLaunch() {
     const router = useRouter();
     const { idLaunches } = router.query;
-    const { getLaunchById } = useContext(AppContext);
+    const { getLaunchById, launches } = useContext(AppContext);
     const [launch, setLaunch] = useState<Launch | null>(null);
     const [isIdValid, setIsIdValid] = useState<boolean>(true);
 
@@ -32,7 +32,7 @@ export default function DetailLaunch() {
         };
 
         fetchLaunch();
-    }, [idLaunches]);
+    }, [idLaunches, launches]);
 
     if (!launch) return null;
 
