@@ -1,8 +1,10 @@
+import { AppContext } from '@/ContextProvider';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 export default function Navbar() {
+    const { isLogged, login } = useContext(AppContext)
     const [menuOpen, setMenuOpen] = useState(false);
     const router = useRouter();
 
@@ -90,8 +92,9 @@ export default function Navbar() {
                                     type="button" 
                                     className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" 
                                     id="user-menu-button" 
+                                    onClick={login}
                                 >
-                                    <span >Login</span>
+                                    <span>{isLogged ? 'Logout' : 'Login'}</span>
                                     <span className="sr-only">Open user menu</span>
                                 </button>
                             </div>
