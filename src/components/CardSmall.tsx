@@ -20,15 +20,15 @@ export default function CardSmall({ launch }: { launch: Launch }) {
     }
 
     return (
-        <div className="max-w-sm relative rounded overflow-hidden shadow-lg">
+        <div className="max-w-sm relative rounded overflow-hidden shadow-lg w-full">
             <img
                 className="w-full"
                 src={launch.image_small}
                 alt="Image patch"
             />
-            <div className="px-6 py-4 min-h-28 max-h-28 overflow-y-hidden">
+            <div className="px-6 py-4 min-h-28 max-h-28">
                 <div className="font-bold text-xl mb-2">{launch.name}</div>
-                <p className="text-gray-700 text-base">{launch.details}</p>
+                <p className="text-gray-700 text-base line-clamp-3">{launch.details}</p>
             </div>
             <div className="px-4 pt-4">
                 <span className="inline-block bg-gray-300 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
@@ -63,6 +63,6 @@ export default function CardSmall({ launch }: { launch: Launch }) {
 					</button>
 				) : null}
             </div>
-        </div>
-    );
+        </div>
+    );
 }
