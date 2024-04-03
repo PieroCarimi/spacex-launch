@@ -26,7 +26,7 @@ export default function Form() {
     const [modalOpen, setModalOpen] = useState(false);
     const [formData, setFormData] = useState<Launch>(currentPath === `/launches/${idLaunches}` ? getLaunchById(parseInt(idLaunches)) : emptyObject);
     const [isValid, setIsValid] = useState(false);
-    
+    console.log({currentPath})
     const validation = () => {
         if(
             formData.name === '' ||
@@ -46,14 +46,25 @@ export default function Form() {
         setIsValid(true);
     };
 
-    const toggleModal = () => {
+    const toggleModal = async () => {
         setModalOpen(!modalOpen);
-        if(currentPath === `/launches/${formData.idLaunches}`){
-            setFormData(getLaunchById(parseInt(idLaunches)));
+        if (currentPath === `/launches/[idLaunches]`) {
+            
+            const launchData = await getLaunchById(idLaunches);
+            setFormData(launchData[0]);
         } else {
             setFormData(emptyObject());
         }
     };
+
+    /*const toggleModal = () => {
+        setModalOpen(!modalOpen);
+        if(currentPath === `/launches/[idLaunches]`){
+            setFormData(getLaunchById(idLaunches));
+        } else {
+            setFormData(emptyObject());
+        }
+    };*/
     console.log(formData)
     const handleChange = (e: { target: { name: any; value: any; }; }) => {
         const { name, value } = e.target;
@@ -74,14 +85,17 @@ export default function Form() {
             setIsValid(false);
         }
     };
+    console.log(isLogged)
     console.log(isValid)
     useEffect(() => {
         validation();
     }, [formData]);
     
+    const classNameContainer = isLogged && (currentPath === '/launches' || currentPath === `/launches/[idLaunches]`) ? '' : 'hidden';
+
     return(
         <>
-        <div className={`${(currentPath === ('/launches' || `/launches/${idLaunches}`) && isLogged) ? '' : 'hidden'} mx-auto max-w-7xl px-2 sm:px-6 lg:px-8`}>
+        <div className={`${classNameContainer} mx-auto max-w-7xl px-2 sm:px-6 lg:px-8`}>
             <div className="relative flex h-16 items-center justify-between">
                 <div></div>
                 <div>
@@ -99,7 +113,7 @@ export default function Form() {
                     <div className="relative bg-white rounded-lg shadow ">
                         <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t ">
                             <h3 className="text-lg font-semibold text-gray-900 ">
-                                Create New Launch
+                                {currentPath === '/launches' ? 'Create New Launch' : 'Update Launch'}
                             </h3>
                             <button type="button" className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center " data-modal-toggle="crud-modal" onClick={toggleModal}>
                                 <svg className="w-3 h-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
