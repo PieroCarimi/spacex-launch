@@ -1,9 +1,9 @@
 export interface Launch {
 	idLaunches: number;
 	name: string;
-	flight_number: number;
-	data_local: Date;
-	success: number;
+	flight_number: string;
+	data_local: string;
+	success: string;
 	image_small: string;
 	image_large: string;
 	webcast_code: string;
