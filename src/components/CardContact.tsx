@@ -4,7 +4,7 @@ export default function CardContact({ contact }: { contact: any }) {
     }
 
     function onClickLinkedin() {
-        window.open(contact.linkLinkedin, "_blank");
+        window.open(contact.linkLinkedIn, "_blank");
     }
 
     return (
