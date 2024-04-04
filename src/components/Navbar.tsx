@@ -78,7 +78,7 @@ export default function Navbar() {
                                 </Link>
                                 <Link 
                                     href="/contacts" 
-                                    className={`${currentPath === '/contcts' ? "bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" : "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"}`} 
+                                    className={`${currentPath === '/contacts' ? "bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" : "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"}`} 
                                 >
                                     Contacts
                                 </Link>
