@@ -5,11 +5,13 @@ import { Launch } from "@/declarations";
 import { useContext, useEffect } from "react";
 
 export default function Launches() {
-    const { launches, getLaunches } = useContext(AppContext);
+    const { launches, getLaunches, loading } = useContext(AppContext);
 
     useEffect(() => {
         getLaunches();
     }, []);
+
+    if(loading){return <div>Loading...</div>}
 
     return (
         <>
