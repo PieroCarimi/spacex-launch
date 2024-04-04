@@ -1,6 +1,7 @@
 import { ReactNode, createContext, useState } from 'react';
 import { Launch, TContext } from './declarations';
 import axios from 'axios';
+import { utilityGetIsLogged, utilitySetIsLogged } from './utilities/utilities';
 
 export const AppContext = createContext<TContext>({
 	launches: [],
@@ -21,9 +22,8 @@ interface Props {
 }
 
 export function ContextProvider({ children, initialLaunches }: Props) {
-	const [launches, setLaunches] =
-		useState<TContext['launches']>(initialLaunches);
-	const [isLogged, setIsLogged] = useState<TContext['isLogged']>(false);
+	const [launches, setLaunches] = useState<TContext['launches']>(initialLaunches);
+	const [isLogged, setIsLogged] = useState<TContext['isLogged']>(utilityGetIsLogged());
 	const [loading, setLoading] = useState<TContext['loading']>(false);
 	const [error, setError] = useState<TContext['error']>('');
 
@@ -115,7 +115,8 @@ export function ContextProvider({ children, initialLaunches }: Props) {
 	};
 
 	const login = () => {
-		setIsLogged(!isLogged);
+		utilitySetIsLogged(!isLogged)
+		setIsLogged(utilityGetIsLogged())
 	}
 
 	return (
