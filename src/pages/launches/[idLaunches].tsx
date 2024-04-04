@@ -34,11 +34,7 @@ export default function DetailLaunch() {
         fetchLaunch();
     }, [idLaunches, launches]);
 
-    if (loading){return <div>Loading...</div>}
-
-    if (!launch) return null;
-
-    
+    if (!launch) return <div>Loading...</div>;
 
     return (
         <>
