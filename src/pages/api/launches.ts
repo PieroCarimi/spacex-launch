@@ -31,7 +31,14 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 					res.status(200).json(idList);
 				})
 			})
-	 	} else {
+	 	} else if (req.query.sortedByDate) {
+			return new Promise((resolve, reject) => {
+				db.query('SELECT * FROM launches ORDER BY data_local', (error, results) => {
+					if (error) throw error;
+					res.status(200).json(results);
+				});
+			})
+		} else {
 			return new Promise((resolve, reject) => {
 				db.query('SELECT * FROM launches', (error, results) => {
 					if (error) throw error;
