@@ -94,7 +94,7 @@ export default function Navbar() {
                                     id="user-menu-button" 
                                     onClick={login}
                                 >
-                                    <span>{isLogged ? 'Logout' : 'Login'}</span>
+                                    <span suppressHydrationWarning>{isLogged ? 'Logout' : 'Login'}</span>
                                     <span className="sr-only">Open user menu</span>
                                 </button>
                             </div>
