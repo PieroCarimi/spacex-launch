@@ -1,3 +1,4 @@
+import { validateForm } from '@/utilities/serverSideValidateForm';
 import mysql from 'mysql2';
 import { NextApiRequest, NextApiResponse } from 'next';
 
@@ -50,6 +51,13 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 			details,
 			article,
 		} = req.body;
+
+		const errors = validateForm(req.body);
+
+		if (errors.length > 0) {
+			return res.status(400).json({ errors });
+		}
+
 		return new Promise((resolve, reject) => {
 			db.query(
 				'INSERT INTO launches (name, flight_number, data_local, success, image_small, image_large, webcast_code, details, article ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
@@ -85,6 +93,13 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 			details,
 			article,
 		} = req.body;
+
+		const errors = validateForm(req.body);
+
+		if (errors.length > 0) {
+			return res.status(400).json({ errors });
+		}
+		
 		return new Promise((resolve, reject) => {
 			db.query(
 				'UPDATE launches SET name = ?, flight_number = ?, data_local =?, success = ?, image_small = ?, image_large = ?, webcast_code = ?, details = ?, article = ? WHERE idLaunches = ?',
